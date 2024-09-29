@@ -30,6 +30,9 @@ const userSchema: Schema<IUser> = new mongoose.Schema({
     default: 'user',
   },
   img: { type: String },
+  verified: { type: Boolean, default: false },
+  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 })
 
 export const User = mongoose.model<IUser>('User', userSchema)
