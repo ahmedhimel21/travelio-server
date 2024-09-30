@@ -5,6 +5,12 @@ import { AuthValidation } from './auth.validation'
 
 const router = Router()
 
+router.put(
+  '/change-password/:email',
+  validateRequest(AuthValidation.changePasswordValidationSchema),
+  AuthControllers.changePassword,
+)
+
 router.post(
   '/login',
   validateRequest(AuthValidation.loginValidationSchema),
@@ -20,6 +26,19 @@ router.post(
   '/register',
   validateRequest(AuthValidation.registerUserValidationSchema),
   AuthControllers.registerUser,
+)
+
+// forget password
+router.post(
+  '/forget-password',
+  validateRequest(AuthValidation.forgetPasswordValidationSchema),
+  AuthControllers.forgetPassword,
+)
+// reset password
+router.post(
+  '/reset-password',
+  validateRequest(AuthValidation.resetPasswordValidationSchema),
+  AuthControllers.resetPassword,
 )
 
 export const AuthRoutes = router

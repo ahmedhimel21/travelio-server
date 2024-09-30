@@ -3,10 +3,11 @@ import config from '../../config'
 
 import bcryptJs from 'bcryptjs'
 import { USER_ROLE } from '../User/user.utils'
-import { TLoginUser } from './auth.interface'
+import { TChangePassword, TLoginUser } from './auth.interface'
 import { createToken, verifyToken } from './auth.utils'
 import AppError from '../../Error/AppError'
 import { User } from '../User/user.model'
+import { sendEmail } from '../../utility/sendEmail'
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
@@ -114,8 +115,70 @@ const registerUser = async (userData: TLoginUser) => {
 
   return user
 }
+
+const changePasswordToDB = async (payload: TChangePassword, email: string) => {
+  const user = await User.findOne({ email })
+  const isPasswordMatched = await bcryptJs.compare(
+    payload.oldPassword,
+    user!.password,
+  )
+  if (!isPasswordMatched) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Password Incorrect!')
+  }
+  user!.password = await bcryptJs.hash(
+    payload?.newPassword,
+    Number(config.bcrypt_salt_rounds),
+  )
+  const res = await user?.save()
+  return res
+}
+
+// forget password
+const forgetPassword = async (email: string) => {
+  const user = await User.findOne({ email })
+  if (!user) {
+    throw new AppError(404, 'User not found!')
+  }
+  const jwtPayload = {
+    email: user.email,
+    role: user.role,
+  }
+
+  const resetToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    '10m',
+  )
+  const resetLink = `${config.reset_password_ui_link}?email=${user.email}&token=${resetToken}`
+  sendEmail(user?.email, resetLink)
+}
+
+// reset password
+const resetPassword = async (
+  payload: { email: string; newPassword: string },
+  token: string,
+) => {
+  const user = await User.findOne({ email: payload?.email })
+  if (!user) {
+    throw new AppError(404, 'User not found!')
+  }
+  const decoded = verifyToken(token, config.jwt_access_secret as string)
+  const { email, role } = decoded
+  if (email !== payload?.email) {
+    throw new AppError(httpStatus.FORBIDDEN, 'You are forbidden')
+  }
+  const hashedPassword = await bcryptJs.hash(
+    payload?.newPassword,
+    Number(config.bcrypt_salt_rounds),
+  )
+  await User.findOneAndUpdate({ email, role }, { password: hashedPassword })
+}
+
 export const AuthServices = {
   loginUser,
   refreshToken,
   registerUser,
+  changePasswordToDB,
+  forgetPassword,
+  resetPassword,
 }

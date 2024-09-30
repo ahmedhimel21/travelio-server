@@ -15,6 +15,9 @@ const createUser = async (user: IUser) => {
 const findUserById = async (userId: string) => {
   return await User.findById(userId)
 }
+const findUserFromDBByEmail = async (email: string) => {
+  return await User.findOne({ email })
+}
 
 const getAllUsers = async (query: Record<string, unknown>) => {
   const userQuery = new QueryBuilder(User.find(), query)
@@ -51,4 +54,5 @@ export const UserService = {
   getAllUsers,
   updateUserById,
   deleteUserById,
+  findUserFromDBByEmail,
 }

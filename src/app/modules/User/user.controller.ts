@@ -21,7 +21,18 @@ const findUserById = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'User is retrieved succesfully',
+    message: 'User is retrieved successfully',
+    data: result,
+  })
+})
+const findUserByEmail = catchAsync(async (req, res) => {
+  const { email } = req.params
+  const result = await UserService.findUserFromDBByEmail(email)
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User is retrieved successfully',
     data: result,
   })
 })
@@ -32,7 +43,7 @@ const getAllUsers = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Users are retrieved succesfully',
+    message: 'Users are retrieved successfully',
     meta: result.meta,
     data: result.data,
   })
@@ -68,4 +79,5 @@ export const UserController = {
   getAllUsers,
   updateUserById,
   deleteUserById,
+  findUserByEmail,
 }
