@@ -31,7 +31,7 @@ router.get(
   UserController.findUserById,
 )
 
-router.patch(
+router.put(
   '/:id',
   // auth(USER_ROLE.admin),
   validateRequest(updateUserValidationSchema),
