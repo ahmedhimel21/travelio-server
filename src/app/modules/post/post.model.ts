@@ -13,6 +13,13 @@ const postSchema: Schema<TPost> = new mongoose.Schema(
     category: { type: String },
     image: String,
     upVotes: { type: Number, default: 0 },
+    downVotes: { type: Number, default: 0 },
+    voters: [
+      {
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        vote: { type: String, enum: ['upvote', 'downvote'] }, // stores 'upvote' or 'downvote'
+      },
+    ],
     premium: { type: Boolean, default: false },
   },
   {
