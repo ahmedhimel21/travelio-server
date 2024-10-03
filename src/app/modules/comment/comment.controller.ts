@@ -19,6 +19,46 @@ const createComment = catchAsync(async (req, res) => {
   })
 })
 
+// get comment by post id
+const getCommentByPostId = catchAsync(async (req, res) => {
+  const { id } = req.params
+  const result = await CommentService.getCommentByPostId(id)
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Post comments retrieved successfully',
+    data: result,
+  })
+})
+
+// update comment
+const updateComment = catchAsync(async (req, res) => {
+  const { commentId } = req.params
+  const { content } = req.body
+  const result = await CommentService.updateComment(commentId, content)
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Comment updated successfully',
+    data: result,
+  })
+})
+
+// delete comment
+const deleteComment = catchAsync(async (req, res) => {
+  const { postId, commentId } = req.params
+  const result = await CommentService.deleteComment(postId, commentId)
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Comment deleted successfully',
+    data: result,
+  })
+})
+
 export const CommentController = {
   createComment,
+  getCommentByPostId,
+  updateComment,
+  deleteComment,
 }

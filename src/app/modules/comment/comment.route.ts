@@ -11,4 +11,13 @@ router.post(
   CommentController.createComment,
 )
 
+// get comment by post id
+router.get('/:id', CommentController.getCommentByPostId)
+
+// update comment
+router.put('/update/:commentId', CommentController.updateComment)
+
+// delete comment
+router.delete('/delete/:commentId/:postId', CommentController.deleteComment)
+
 export const CommentRoute = router
