@@ -1,4 +1,5 @@
 import { Types } from 'mongoose'
+import { TComment } from '../comment/comment.interface'
 
 interface Voter {
   user: Types.ObjectId
@@ -11,6 +12,7 @@ export type TPost = {
   content?: string
   category: string
   image?: string
+  comments: [TComment]
   upVotes: number
   downVotes: number
   voters: Voter[]

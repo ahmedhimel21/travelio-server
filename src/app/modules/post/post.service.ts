@@ -3,11 +3,13 @@ import AppError from '../../Error/AppError'
 import { TPost } from './post.interface'
 import { Post } from './post.model'
 
+// create post
 const createPostIntoDB = async (payload: TPost) => {
   const result = await Post.create(payload)
   return result
 }
 
+// get specific user
 const getUserSinglePost = async (id: string) => {
   const result = await Post.find({ author: id }).populate('author')
   return result
@@ -17,6 +19,7 @@ const getUserSinglePost = async (id: string) => {
 const getAllPost = async () => {
   const result = await Post.find()
     .populate('author')
+    .populate('comments')
     .sort({ upVotes: -1 })
     .exec()
   return result

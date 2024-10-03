@@ -12,6 +12,7 @@ const postSchema: Schema<TPost> = new mongoose.Schema(
     content: { type: String, required: true },
     category: { type: String },
     image: String,
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
     upVotes: { type: Number, default: 0 },
     downVotes: { type: Number, default: 0 },
     voters: [
