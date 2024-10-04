@@ -48,6 +48,31 @@ const deleteUserById = async (userId: string) => {
   return result
 }
 
+// follow user
+const followUser = async (userId: string, currentUserId: string) => {
+  // Add the followed user's ID to the current user's following list
+  await User.findByIdAndUpdate(currentUserId, {
+    $addToSet: { following: userId },
+  })
+
+  // Add the current user's ID to the followed user's followers list
+  await User.findByIdAndUpdate(userId, {
+    $addToSet: { followers: currentUserId },
+  })
+}
+// unFollow user
+const unFollowUser = async (userId: string, currentUserId: string) => {
+  // Remove the unfollowed user's ID from the current user's following list
+  await User.findByIdAndUpdate(currentUserId, {
+    $pull: { following: userId },
+  })
+
+  // Remove the current user's ID from the unfollowed user's followers list
+  await User.findByIdAndUpdate(userId, {
+    $pull: { followers: currentUserId },
+  })
+}
+
 export const UserService = {
   createUser,
   findUserById,
@@ -55,4 +80,6 @@ export const UserService = {
   updateUserById,
   deleteUserById,
   findUserFromDBByEmail,
+  followUser,
+  unFollowUser,
 }

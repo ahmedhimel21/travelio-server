@@ -73,6 +73,30 @@ const deleteUserById = catchAsync(async (req, res) => {
   })
 })
 
+const followUser = catchAsync(async (req, res) => {
+  const userId = req.params.userId
+  const currentUserId = req.user._id
+  await UserService.followUser(userId, currentUserId)
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User is followed successful',
+    data: null,
+  })
+})
+
+const unFollowUser = catchAsync(async (req, res) => {
+  const userId = req.params.userId
+  const currentUserId = req.user._id
+  await UserService.unFollowUser(userId, currentUserId)
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User is unFollowed successfully',
+    data: null,
+  })
+})
+
 export const UserController = {
   createUser,
   findUserById,
@@ -80,4 +104,6 @@ export const UserController = {
   updateUserById,
   deleteUserById,
   findUserByEmail,
+  followUser,
+  unFollowUser,
 }

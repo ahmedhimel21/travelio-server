@@ -2,6 +2,8 @@ import httpStatus from 'http-status'
 import AppError from '../../Error/AppError'
 import { TPost } from './post.interface'
 import { Post } from './post.model'
+import QueryBuilder from '../../builder/QueryBuilder'
+import { searchableFields } from '../../utility/searchFields'
 
 // create post
 const createPostIntoDB = async (payload: TPost) => {
@@ -16,13 +18,28 @@ const getUserSinglePost = async (id: string) => {
 }
 
 // get all post
-const getAllPost = async () => {
-  const result = await Post.find()
+const getAllPost = async (query: Record<string, unknown>) => {
+  const postQuery = new QueryBuilder(Post.find(), query)
+    .search(searchableFields) // Specify the searchable fields
+    .filter()
+    .sort()
+    .paginate()
+    .fields()
+
+  const result = await postQuery.modelQuery
     .populate('author')
     .populate('comments')
-    .sort({ upVotes: -1 })
     .exec()
-  return result
+
+  // Get total post count and pagination details
+  const { total, totalPage, page, limit } = await postQuery.countTotal()
+  return {
+    posts: result,
+    totalPages: totalPage,
+    currentPage: page,
+    totalPosts: total,
+    limit,
+  }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
