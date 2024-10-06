@@ -27,5 +27,7 @@ router.get(
   auth(USER_ROLE.user, USER_ROLE.admin),
   PostController.getAllPost,
 )
+// get post by id
+router.get('/getPost/:postId', PostController.getPostById)
 
 export const PostRoute = router

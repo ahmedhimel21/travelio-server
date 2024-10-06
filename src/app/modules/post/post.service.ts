@@ -58,6 +58,12 @@ const getAllPost = async (query: Record<string, unknown>, user: any) => {
   }
 }
 
+// get post by
+const getPostById = async (postId: string) => {
+  const result = await Post.findById({ _id: postId }).populate('author')
+  return result
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const upVotes = async (userId: any, postId: string) => {
   const post = await Post.findById(postId)
@@ -134,4 +140,5 @@ export const PostService = {
   getAllPost,
   upVotes,
   downVotes,
+  getPostById,
 }

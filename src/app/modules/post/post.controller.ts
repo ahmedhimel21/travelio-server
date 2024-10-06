@@ -35,6 +35,18 @@ const getAllPost = catchAsync(async (req, res) => {
   })
 })
 
+// get post by id
+const getPostById = catchAsync(async (req, res) => {
+  const postId = req.params.postId
+  const result = await PostService.getPostById(postId)
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Post retrieved successfully!',
+    data: result,
+  })
+})
+
 const upVotes = catchAsync(async (req, res) => {
   const userId = req.user._id
   const postId = req.params.id
@@ -65,4 +77,5 @@ export const PostController = {
   getAllPost,
   upVotes,
   downVotes,
+  getPostById,
 }
