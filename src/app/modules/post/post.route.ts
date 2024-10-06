@@ -22,6 +22,10 @@ router.post(
 router.get('/:id', PostController.getUserPost)
 
 // get all post
-router.get('/', PostController.getAllPost)
+router.get(
+  '/',
+  auth(USER_ROLE.user, USER_ROLE.admin),
+  PostController.getAllPost,
+)
 
 export const PostRoute = router

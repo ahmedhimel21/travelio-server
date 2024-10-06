@@ -1,38 +1,54 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status'
 import AppError from '../../Error/AppError'
 import { TPost } from './post.interface'
 import { Post } from './post.model'
 import QueryBuilder from '../../builder/QueryBuilder'
 import { searchableFields } from '../../utility/searchFields'
+import { User } from '../User/user.model'
 
 // create post
 const createPostIntoDB = async (payload: TPost) => {
-  const result = await Post.create(payload)
+  const result = (
+    await (await Post.create(payload)).populate('author')
+  ).populate('comments')
   return result
 }
 
-// get specific user
+// get specific user post
 const getUserSinglePost = async (id: string) => {
-  const result = await Post.find({ author: id }).populate('author')
+  const result = await Post.find({ author: id })
+    .populate('author')
+    .sort({ createdAt: -1 })
   return result
 }
 
 // get all post
-const getAllPost = async (query: Record<string, unknown>) => {
-  const postQuery = new QueryBuilder(Post.find(), query)
+const getAllPost = async (query: Record<string, unknown>, user: any) => {
+  const findUser = await User.findOne({ email: user?.email })
+  const userVerified = findUser?.verified
+  // Initialize the query
+  let postQuery: any = Post.find()
+
+  // If the user is not verified, filter out premium posts
+  if (!userVerified) {
+    postQuery = postQuery.where({ premium: false })
+  }
+  const postQueryBuilder = new QueryBuilder(Post.find(), query)
     .search(searchableFields) // Specify the searchable fields
     .filter()
     .sort()
     .paginate()
     .fields()
 
-  const result = await postQuery.modelQuery
+  const result = await postQueryBuilder.modelQuery
     .populate('author')
     .populate('comments')
     .exec()
 
   // Get total post count and pagination details
-  const { total, totalPage, page, limit } = await postQuery.countTotal()
+  const { total, totalPage, page, limit } = await postQueryBuilder.countTotal()
   return {
     posts: result,
     totalPages: totalPage,
