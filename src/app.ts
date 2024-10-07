@@ -22,7 +22,7 @@ app.use('/api/v1', routes)
 
 app.get('/', (req, res) => {
   res.status(200).json({
-    message: 'Welcome',
+    message: 'Welcome to Trvelio',
   })
 })
 

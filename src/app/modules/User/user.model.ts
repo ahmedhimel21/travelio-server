@@ -25,6 +25,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
     password: {
       type: String,
     },
+    lastLogin: { type: Date },
     role: {
       type: String,
       enum: ['admin', 'user', 'driver'],

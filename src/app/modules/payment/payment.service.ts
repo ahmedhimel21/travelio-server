@@ -7,6 +7,7 @@ import verifyPayment from './payment.utils'
 import { User } from '../User/user.model'
 import mongoose from 'mongoose'
 import { Post } from '../post/post.model'
+import { Payment } from './payment.model'
 
 const makePayment = async (payload: any) => {
   const { data } = await axios.post(
@@ -37,6 +38,13 @@ const paymentConfirmation = async (
         verified: true,
       },
     )
+    // Create a new payment record in the database
+    await Payment.create({
+      userId: new mongoose.Types.ObjectId(_id),
+      transactionId: transactionId,
+      status: 'Successful',
+      amount: verifyResponse?.amount,
+    })
     const successFilePath = join(__dirname, '../../../../public/success.ejs')
     const successTemplate = await ejs.renderFile(successFilePath, {
       status,
@@ -65,7 +73,66 @@ const paymentConfirmation = async (
   }
 }
 
+const getPaymentStats = async () => {
+  const totalPayments = await Payment.countDocuments({ status: 'Successful' })
+  const paymentsPerMonth = await Payment.aggregate([
+    {
+      $match: { status: 'Successful' },
+    },
+    {
+      $group: {
+        _id: { $month: '$createdAt' },
+        totalAmount: { $sum: '$amount' }, // Add 'amount' field to payment schema if needed
+        count: { $sum: 1 },
+      },
+    },
+    { $sort: { _id: 1 } },
+  ])
+  return {
+    totalPayments,
+    paymentsPerMonth,
+  }
+}
+
+const dashboardData = async () => {
+  // Count active users who have logged in within the last 30 days
+  const activeUsersCount = await User.countDocuments({
+    lastLogin: { $gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) }, // Past 30 days
+  })
+  // Sum of successful payments
+  const totalPayments = await Payment.aggregate([
+    { $match: { status: 'Successful' } },
+    { $group: { _id: null, totalAmount: { $sum: '$amount' } } },
+  ])
+  // Get the first and last date of the current month
+  const startOfMonth = new Date(
+    new Date().getFullYear(),
+    new Date().getMonth(),
+    1,
+  )
+  const endOfMonth = new Date(
+    new Date().getFullYear(),
+    new Date().getMonth() + 1,
+    0,
+  )
+  // Count user logins this month
+  const monthlyActivity = await User.countDocuments({
+    lastLogin: { $gte: startOfMonth, $lte: endOfMonth },
+  })
+  const monthlyPosts = await Post.countDocuments({
+    createdAt: { $gte: startOfMonth, $lte: endOfMonth },
+  })
+  return {
+    activeUsersCount,
+    totalPayments,
+    monthlyActivity,
+    monthlyPosts,
+  }
+}
+
 export const PaymentService = {
   makePayment,
   paymentConfirmation,
+  getPaymentStats,
+  dashboardData,
 }

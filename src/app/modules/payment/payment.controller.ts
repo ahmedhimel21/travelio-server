@@ -42,7 +42,29 @@ const paymentConfirmation = catchAsync(async (req, res) => {
   res.send(result)
 })
 
+const getPaymentStats = catchAsync(async (req, res) => {
+  const result = await PaymentService.getPaymentStats()
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Payment stats retrieved successfully',
+    data: result,
+  })
+})
+
+const dashboardData = catchAsync(async (req, res) => {
+  const result = await PaymentService.dashboardData()
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Dashboard data retrieved successfully!',
+    data: result,
+  })
+})
+
 export const PaymentController = {
   makePayment,
   paymentConfirmation,
+  getPaymentStats,
+  dashboardData,
 }

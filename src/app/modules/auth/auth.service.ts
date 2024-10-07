@@ -31,7 +31,6 @@ const loginUser = async (payload: TLoginUser) => {
       config.jwt_refresh_secret as string,
       config.jwt_refresh_expires_in as string,
     )
-
     return {
       accessToken,
       refreshToken,
@@ -174,6 +173,10 @@ const resetPassword = async (
   await User.findOneAndUpdate({ email, role }, { password: hashedPassword })
 }
 
+const updateLastLogin = async (userId: string) => {
+  await User.findByIdAndUpdate(userId, { lastLogin: new Date() })
+}
+
 export const AuthServices = {
   loginUser,
   refreshToken,
@@ -181,4 +184,5 @@ export const AuthServices = {
   changePasswordToDB,
   forgetPassword,
   resetPassword,
+  updateLastLogin,
 }

@@ -76,6 +76,17 @@ const resetPassword = catchAsync(async (req, res) => {
   })
 })
 
+const updateLastLogin = catchAsync(async (req, res) => {
+  const userId = req.params.userId
+  await AuthServices.updateLastLogin(userId)
+  sendResponse(res, {
+    success: true,
+    message: 'User last login updated successfully',
+    statusCode: 200,
+    data: null,
+  })
+})
+
 export const AuthControllers = {
   loginUser,
   refreshToken,
@@ -83,4 +94,5 @@ export const AuthControllers = {
   changePassword,
   forgetPassword,
   resetPassword,
+  updateLastLogin,
 }

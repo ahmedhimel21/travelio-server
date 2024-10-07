@@ -7,6 +7,7 @@ export interface IUser {
   password: string
   role: 'admin' | 'user'
   verified?: boolean
+  lastLogin: Date
   followers: Types.ObjectId[]
   following: Types.ObjectId[]
 }
