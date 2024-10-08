@@ -58,6 +58,12 @@ const getAllPost = async (query: Record<string, unknown>, user: any) => {
   }
 }
 
+//get all posts
+const getAllPostsForTable = async () => {
+  const result = await Post.find({}).populate('author')
+  return result
+}
+
 // get post by
 const getPostById = async (postId: string) => {
   const result = await Post.findById({ _id: postId }).populate('author')
@@ -141,4 +147,5 @@ export const PostService = {
   upVotes,
   downVotes,
   getPostById,
+  getAllPostsForTable,
 }

@@ -35,6 +35,16 @@ const getAllPost = catchAsync(async (req, res) => {
   })
 })
 
+const getAllPostsForTable = catchAsync(async (req, res) => {
+  const result = await PostService.getAllPostsForTable()
+  sendResponse(res, {
+    success: true,
+    message: 'posts has been retrieved successfully!',
+    statusCode: 200,
+    data: result,
+  })
+})
+
 // get post by id
 const getPostById = catchAsync(async (req, res) => {
   const postId = req.params.postId
@@ -78,4 +88,5 @@ export const PostController = {
   upVotes,
   downVotes,
   getPostById,
+  getAllPostsForTable,
 }

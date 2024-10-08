@@ -21,6 +21,8 @@ router.post(
 
 router.get('/:id', PostController.getUserPost)
 
+router.get('/get-all-posts/tableData', PostController.getAllPostsForTable)
+
 // get all post
 router.get(
   '/',
