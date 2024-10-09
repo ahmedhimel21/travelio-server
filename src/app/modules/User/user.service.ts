@@ -73,6 +73,17 @@ const unFollowUser = async (userId: string, currentUserId: string) => {
   })
 }
 
+const updateUserRoleIntoDB = async (id: string) => {
+  const res = await User.findByIdAndUpdate(
+    id,
+    {
+      role: 'admin',
+    },
+    { new: true, runValidators: true },
+  )
+  return res
+}
+
 export const UserService = {
   createUser,
   findUserById,
@@ -82,4 +93,5 @@ export const UserService = {
   findUserFromDBByEmail,
   followUser,
   unFollowUser,
+  updateUserRoleIntoDB,
 }

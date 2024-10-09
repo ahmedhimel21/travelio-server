@@ -81,6 +81,30 @@ const downVotes = catchAsync(async (req, res) => {
   })
 })
 
+//update post
+const updatePost = catchAsync(async (req, res) => {
+  const { id } = req.params
+  const result = await PostService.updatePostIntoDB(id, req.body)
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'post updated successfully',
+    data: result,
+  })
+})
+
+//delete post
+const deletePost = catchAsync(async (req, res) => {
+  const { id } = req.params
+  const result = await PostService.deletePostFromDB(id)
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'post deleted successfully',
+    data: result,
+  })
+})
+
 export const PostController = {
   createPost,
   getUserPost,
@@ -89,4 +113,6 @@ export const PostController = {
   downVotes,
   getPostById,
   getAllPostsForTable,
+  updatePost,
+  deletePost,
 }

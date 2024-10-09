@@ -32,4 +32,8 @@ router.get(
 // get post by id
 router.get('/getPost/:postId', PostController.getPostById)
 
+router.put('/update/:id', PostController.updatePost)
+
+router.delete('/:id', PostController.deletePost)
+
 export const PostRoute = router

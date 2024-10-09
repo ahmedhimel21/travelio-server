@@ -57,4 +57,6 @@ router.post(
   UserController.unFollowUser,
 )
 
+router.put('/update-role/:id', UserController.updateUserRole)
+
 export const UserRoutes = router

@@ -140,6 +140,36 @@ const downVotes = async (userId: any, postId: string) => {
   return result
 }
 
+//update service
+const updatePostIntoDB = async (id: string, payload: Partial<TPost>) => {
+  const service = await Post.findById(id)
+  //check isService exists
+  if (!service) {
+    throw new AppError(404, 'Service not found!')
+  }
+
+  const result = await Post.findByIdAndUpdate(id, payload, {
+    new: true,
+    runValidators: true,
+  })
+  return result
+}
+
+//delete service
+const deletePostFromDB = async (id: string) => {
+  const service = await Post.findById(id)
+  //check isService exists
+  if (!service) {
+    throw new AppError(404, 'Service not found!')
+  }
+  const result = await Post.findByIdAndUpdate(
+    id,
+    { isDeleted: true },
+    { new: true },
+  )
+  return result
+}
+
 export const PostService = {
   createPostIntoDB,
   getUserSinglePost,
@@ -148,4 +178,6 @@ export const PostService = {
   downVotes,
   getPostById,
   getAllPostsForTable,
+  updatePostIntoDB,
+  deletePostFromDB,
 }
