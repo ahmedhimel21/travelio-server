@@ -10,7 +10,15 @@ const app: Application = express()
 app.use(express.static(path.join(__dirname, '../public')))
 
 // middleware
-app.use(cors({ origin: ['http://localhost:5173'], credentials: true }))
+app.use(
+  cors({
+    origin: [
+      'http://localhost:5173',
+      'https://travelio-client-dusky.vercel.app',
+    ],
+    credentials: true,
+  }),
+)
 app.use(cookieParser())
 app.use(express.json())
 
