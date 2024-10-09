@@ -162,11 +162,7 @@ const deletePostFromDB = async (id: string) => {
   if (!service) {
     throw new AppError(404, 'Service not found!')
   }
-  const result = await Post.findByIdAndUpdate(
-    id,
-    { isDeleted: true },
-    { new: true },
-  )
+  const result = await Post.findByIdAndDelete(id)
   return result
 }
 
