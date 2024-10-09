@@ -1,0 +1,716 @@
+{
+	"info": {
+		"_postman_id": "11c1a0f7-19f5-4847-b468-2fd5a6a01b28",
+		"name": "assignment-six",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34976651"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tashfik@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{assignment-six}}/auth/login",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sahabuddin Ahmed\",\r\n    \"email\": \"Sahabuddin@gmail.com\",\r\n    \"img\": \"http://my-image.com\",\r\n    \"password\": \"default-pass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{assignment-six}}/auth/register",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\": \"default-pass\",\r\n    \"newPassword\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{assignment-six}}/auth/change-password/sahabuddin@gmail.com",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"auth",
+								"change-password",
+								"sahabuddin@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forget password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVka2hhbjc3Nzc3OEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcyNzcwNjg2OSwiZXhwIjoxNzI3NzA3NDY5fQ.a0sxU2z38_kq1hSoeemwU7ULJ-i_YblNz2wlqpqjkoM",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ahmedkhan777778@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{assignment-six}}/auth/forget-password",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"auth",
+								"forget-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVka2hhbjc3Nzc3OEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcyNzcyNTQxMCwiZXhwIjoxNzI3NzI2MDEwfQ.lXN_H2mHkg0RxFm1jjJdGLDv0Xm-FLbdSA5C8vaSd20",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ahmedkhan777778@gmail.com\",\r\n    \"newPassword\": \"default-pass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{assignment-six}}/auth/reset-password",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "last login",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{assignment-six}}/auth/last-login/userId",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"auth",
+								"last-login",
+								"userId"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get user by email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{assignment-six}}/users/ahmedhimel000@gmail.com",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"users",
+								"ahmedhimel000@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ahmed Khan77\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{assignment-six}}/users/66fbcc85fd08481c6c5a16a9",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"users",
+								"66fbcc85fd08481c6c5a16a9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "follow user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVka2hhbjc3Nzc3OEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsIl9pZCI6IjY2ZmJjYzg1ZmQwODQ4MWM2YzVhMTZhOSIsImlhdCI6MTcyODA2NjI0OCwiZXhwIjoxNzU5NjAyMjQ4fQ.liOX1wjiOCA5spb1ngNHZ1_85TdVCOjsvAWDQP94acY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{assignment-six}}/users/66f69a2cfdc51c28d8d95b0f/follow",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"users",
+								"66f69a2cfdc51c28d8d95b0f",
+								"follow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unfollow user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVka2hhbjc3Nzc3OEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsIl9pZCI6IjY2ZmJjYzg1ZmQwODQ4MWM2YzVhMTZhOSIsImlhdCI6MTcyODA2NjI0OCwiZXhwIjoxNzU5NjAyMjQ4fQ.liOX1wjiOCA5spb1ngNHZ1_85TdVCOjsvAWDQP94acY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{assignment-six}}/users/66f69a2cfdc51c28d8d95b0f/unfollow",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"users",
+								"66f69a2cfdc51c28d8d95b0f",
+								"unfollow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{assignment-six}}/users",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user role",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{assignment-six}}/users/update-role/66fbcc85fd08481c6c5a16a9",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"users",
+								"update-role",
+								"66fbcc85fd08481c6c5a16a9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "make payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"66fbcc85fd08481c6c5a16a9\",\r\n    \"name\": \"Sahabuddin Ahmed\",\r\n    \"email\": \"sahabuddin@gmail.com\",\r\n    \"amount\": 2000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{assignment-six}}/payment/verifyProfile",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"payment",
+								"verifyProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get payment stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{assignment-six}}/payment/paymentStats",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"payment",
+								"paymentStats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dashboard data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{assignment-six}}/payment/dashboard-data",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"payment",
+								"dashboard-data"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "post",
+			"item": [
+				{
+					"name": "create post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"author\": \"66fbcc85fd08481c6c5a16a9\",\r\n    \"title\": \"Exploring the Mountains of Nepal\",\r\n    \"content\": \"This region boasts eight out of the ten highest mountains in the world, including Mount Everest, the highest peak on Earth. The Annapurna Range, Langtang Valley, Ganesh Himal, Manaslu, Dhaulagiri, and Makalu are among the other prominent mountainous regions in Nepal.\",\r\n    \"category\": \"Travel\",\r\n    \"image\": \"https://img.freepik.com/free-photo/beautiful-view-mountains-covered-snow-annapurna-conservation-area-chhusang-nepal_181624-15705.jpg\",\r\n    \"premium\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{assignment-six}}/post/create",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"post",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{assignment-six}}/post/670224439a4d9e0d1fe160bf",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"post",
+								"670224439a4d9e0d1fe160bf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all posts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhc2hmaWtAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJfaWQiOiI2NzAyMjQ0MzlhNGQ5ZTBkMWZlMTYwYmYiLCJpYXQiOjE3MjgyMzA0MTEsImV4cCI6MTc1OTc2NjQxMX0.JJfvB_IoOD-2XSVFNGwW4ILiSb3nlLcfQhl22lYFUNY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{assignment-six}}/post?page=1&limit=3&category=Adventure&sort=-upVotes",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"post"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								},
+								{
+									"key": "category",
+									"value": "Adventure"
+								},
+								{
+									"key": "sort",
+									"value": "-upVotes"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upvote",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVka2hhbjc3Nzc3OEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsIl9pZCI6IjY2ZmJjYzg1ZmQwODQ4MWM2YzVhMTZhOSIsImlhdCI6MTcyNzg4Mjg5MywiZXhwIjoxNzU5NDE4ODkzfQ.wAjrTGETO9gMkz-7WQxev1L3Ooy_HJb8ZuJbRSQVu84",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{assignment-six}}/post/upvote/66fd12944bffc076be0e8fb4",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"post",
+								"upvote",
+								"66fd12944bffc076be0e8fb4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "down vote",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVka2hhbjc3Nzc3OEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsIl9pZCI6IjY2ZmJjYzg1ZmQwODQ4MWM2YzVhMTZhOSIsImlhdCI6MTcyNzg4Mjg5MywiZXhwIjoxNzU5NDE4ODkzfQ.wAjrTGETO9gMkz-7WQxev1L3Ooy_HJb8ZuJbRSQVu84",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{assignment-six}}/post/downvote/66fd12944bffc076be0e8fb4",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"post",
+								"downvote",
+								"66fd12944bffc076be0e8fb4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{assignment-six}}/post/getPost/66fd12944bffc076be0e8fb4",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"post",
+								"getPost",
+								"66fd12944bffc076be0e8fb4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all posts table",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{assignment-six}}/post/get-all-posts/tableData",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"post",
+								"get-all-posts",
+								"tableData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update post",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Exploration Niagara Falls\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{assignment-six}}/post/update/67061a36e0a1522ccd06716d",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"post",
+								"update",
+								"67061a36e0a1522ccd06716d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{assignment-six}}/post/67061a36e0a1522ccd06716d",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"post",
+								"67061a36e0a1522ccd06716d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comment",
+			"item": [
+				{
+					"name": "create comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVka2hhbjc3Nzc3OEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsIl9pZCI6IjY2ZmJjYzg1ZmQwODQ4MWM2YzVhMTZhOSIsImlhdCI6MTcyNzk0MjIxNywiZXhwIjoxNzU5NDc4MjE3fQ.vavZYVp17QKve9pNK8TYlVQYg701WPcxK8ZMgjLvLYk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Tank you\",\r\n    \"postId\": \"66fd12944bffc076be0e8fb4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{assignment-six}}/comment/create",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"comment",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get comment by post id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{assignment-six}}/comment/66fd4f31acf11a25878a1608",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"comment",
+								"66fd4f31acf11a25878a1608"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update comment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Thank you! updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{assignment-six}}/comment/update/66fea3b346106ac6bdc3e27d",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"comment",
+								"update",
+								"66fea3b346106ac6bdc3e27d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete comment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{assignment-six}}/comment/delete/66fea2e446106ac6bdc3e229/66fd12944bffc076be0e8fb4",
+							"host": [
+								"{{assignment-six}}"
+							],
+							"path": [
+								"comment",
+								"delete",
+								"66fea2e446106ac6bdc3e229",
+								"66fd12944bffc076be0e8fb4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
