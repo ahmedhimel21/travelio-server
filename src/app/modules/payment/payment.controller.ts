@@ -19,9 +19,9 @@ const makePayment = catchAsync(async (req, res) => {
     cus_add2: 'N/A',
     cus_city: 'N/A',
     cus_country: 'Bangladesh',
-    success_url: `http://localhost:5000/api/v1/payment/confirmation?transactionId=${transactionId}&userId=${req.body._id}&status=success`,
-    fail_url: `http://localhost:5000/api/v1/payment/confirmation?status=failed`,
-    cancel_url: `http://localhost:3000`,
+    success_url: `https://assignment-06-server-phi.vercel.app/api/v1/payment/confirmation?transactionId=${transactionId}&userId=${req.body._id}&status=success`,
+    fail_url: `https://assignment-06-server-phi.vercel.app/api/v1/payment/confirmation?status=failed`,
+    cancel_url: `https://travelio-client-dusky.vercel.app`,
     type: 'json',
   }
   const result = await PaymentService.makePayment(modifiedPaymentObj)

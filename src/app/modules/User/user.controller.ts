@@ -108,6 +108,18 @@ const updateUserRole = catchAsync(async (req, res) => {
   })
 })
 
+// get suggestion user
+const getSuggestionUser = catchAsync(async (req, res) => {
+  const { userId } = req.params
+  const result = await UserService.getSuggestionUserFromDB(userId)
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'User suggestion retrieved successfully',
+    data: result,
+  })
+})
+
 export const UserController = {
   createUser,
   findUserById,
@@ -118,4 +130,5 @@ export const UserController = {
   followUser,
   unFollowUser,
   updateUserRole,
+  getSuggestionUser,
 }

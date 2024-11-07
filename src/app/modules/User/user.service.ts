@@ -84,6 +84,21 @@ const updateUserRoleIntoDB = async (id: string) => {
   return res
 }
 
+// get suggestion user
+const getSuggestionUserFromDB = async (userId: string) => {
+  // Get the logged-in user's details
+  const user = await User.findById(userId)
+  // Find users who are not in the user's "following" list and are not the user
+  const suggestedUsers = await User.find({
+    $and: [{ _id: { $ne: userId } }, { _id: { $nin: user!.following } }],
+  })
+    .limit(10)
+    .select('_id name img email')
+    .lean()
+
+  return suggestedUsers
+}
+
 export const UserService = {
   createUser,
   findUserById,
@@ -94,4 +109,5 @@ export const UserService = {
   followUser,
   unFollowUser,
   updateUserRoleIntoDB,
+  getSuggestionUserFromDB,
 }

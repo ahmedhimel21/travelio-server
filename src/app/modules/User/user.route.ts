@@ -59,4 +59,6 @@ router.post(
 
 router.put('/update-role/:id', UserController.updateUserRole)
 
+router.get('/suggestion/:userId', UserController.getSuggestionUser)
+
 export const UserRoutes = router
